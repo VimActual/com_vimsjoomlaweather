@@ -1,6 +1,6 @@
 <?php
 
-namespace Vim\Component\VimsJoomlaWeather\Administrator\Controller;
+namespace Vim\Component\com_vimsjoomlaweather\Administrator\Controller;
 
 defined('_JEXEC') or die;
 
