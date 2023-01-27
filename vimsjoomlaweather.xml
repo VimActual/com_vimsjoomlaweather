@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="2.0" encoding="utf-8"?>
 <extension type="component" method="upgrade">
 <!-- 'version' attribute for extension tag is no longer used -->
 
@@ -28,7 +28,12 @@
     this XML file is, the namespace must match (ignoring CamelCase). 
     -->
     <namespace path="src/">Vim\Component\com_vimsjoomlaweather</namespace>
-            
+
+    <files folder="site/">
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
     <administration>
         <!-- The link that will appear in the Admin panel's "Components" menu -->
         <menu link="index.php?option=com_vimsjoomlaweather">Vim's Joomla Weather</menu>
