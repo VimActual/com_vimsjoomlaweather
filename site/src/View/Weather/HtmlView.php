@@ -1,6 +1,6 @@
 <?php
 
-namespace Vim\Component\com_vimsjoomlaweather\Site\View\Hello;
+namespace Vim\Component\com_vimsjoomlaweather\Site\View\Weather;
 
 defined('_JEXEC') or die;
 

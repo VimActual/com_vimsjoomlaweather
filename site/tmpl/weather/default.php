@@ -11,4 +11,4 @@
  // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 ?>
-<h2>Weather</h2>
+<h2>Simply Your Weather</h2>
