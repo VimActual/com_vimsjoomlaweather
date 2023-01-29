@@ -6,6 +6,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Factory;
+use Vim\Component\com_vimsjoomlaweather\Site\Model\WeatherModel;
 
 /**
  * @package     Joomla.Site
@@ -20,16 +21,12 @@ use Joomla\CMS\Factory;
  * @since  0.0.2
  */
 class DisplayController extends BaseController {
+   public function display($cachable = false, $urlparams = []) {        
+    $model = new WeatherModel;
+    $weatherData = $model->getWeatherData();
+    $view = $this->getView('Weather', 'html');
+    $view->weatherData = $weatherData;
+    $view->display();
+   }
     
-    public function display($cachable = false, $urlparams = array()) {        
-        $document = Factory::getDocument();
-        $viewName = $this->input->getCmd('view', 'login');
-        $viewFormat = $document->getType();
-        
-        $view = $this->getView($viewName, $viewFormat);
-        
-        $view->document = $document;
-        $view->display();
-    }
-    
-}
+} 

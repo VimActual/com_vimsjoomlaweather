@@ -31,7 +31,7 @@
 
     <files folder="site/">
         <folder>src</folder>
-        <folder>tmpl</folder>
+	<folder>tmpl</folder>
     </files>
 
     <administration>

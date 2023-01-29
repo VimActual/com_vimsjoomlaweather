@@ -5,6 +5,8 @@ namespace Vim\Component\com_vimsjoomlaweather\Site\View\Weather;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+# Make sure to add any php namespaces that the View of MVC needs
+use Vim\Component\com_vimsjoomlaweather\Site\Model\WeatherModel;
 
 /**
  * @package     Joomla.Site
@@ -27,7 +29,8 @@ class HtmlView extends BaseHtmlView {
      * @return  void
      */
     public function display($template = null) {
-        // Call the parent display to display the layout file
+        $weatherModel = new WeatherModel();
+        $this->result = $weatherModel->getWeatherData();
         parent::display($template);
     }
 
