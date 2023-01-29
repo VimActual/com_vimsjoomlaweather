@@ -16,4 +16,7 @@ defined('_JEXEC') or die('Restricted Access');
   <?php foreach ($this->weatherData as $data): ?>
     <p><?php echo $data; ?></p>
   <?php endforeach; ?>
+<?php
+echo $this;
+?>
 </div>

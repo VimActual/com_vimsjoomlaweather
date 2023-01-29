@@ -29,8 +29,11 @@ class HtmlView extends BaseHtmlView {
      * @return  void
      */
     public function display($template = null) {
-        $weatherModel = new WeatherModel();
-        $this->result = $weatherModel->getWeatherData();
+        $zipcode = \JFactory::getApplication()->input->getString('zipcode');    
+	$weatherModel = new WeatherModel();
+	if ($zipcode) {
+		$this->result = $weatherModel->getWeatherData($zipcode);
+	}
         parent::display($template);
     }
 
