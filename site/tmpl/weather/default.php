@@ -13,19 +13,6 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 <h2>Simply Your Weather</h2>
 <div id="weather-data">
-<?php
-echo $this;
-?>
-
-<?php
-if (isset($weatherData)) {
-  echo '<pre>';
-  print_r($weatherData);
-  echo '</pre>';
-} else {
-  echo '<p>Weather data not found</p>';
-}
-?>
   <?php foreach ($this->weatherData as $data): ?>
     <p><?php echo $data; ?></p>
   <?php endforeach; ?>
