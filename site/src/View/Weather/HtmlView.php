@@ -32,7 +32,7 @@ class HtmlView extends BaseHtmlView {
         $zipcode = \JFactory::getApplication()->input->getString('zipcode');    
 	$weatherModel = new WeatherModel();
 	if ($zipcode) {
-		$this->result = $weatherModel->getWeatherData($zipcode);
+		$this->weatherData = $weatherModel->getWeatherData($zipcode);
 	}
         parent::display($template);
     }

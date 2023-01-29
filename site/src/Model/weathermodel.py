@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import requests
+import json
 
 class Weather():
     def __init__(self):
@@ -51,7 +52,7 @@ class Weather():
             # Extract the JSON data from the response
             data = response.json()
             # Get the forecast data from the JSON data
-            forecast_data = data["properties"]["periods"]
+            #forecast_data = data["properties"]["periods"]
             # Loop through the forecast data and print out the day and the forecast
             '''
             for day in forecast_data:
@@ -60,7 +61,7 @@ class Weather():
                 print("\n")
             '''
             # Instead of looping I'll let the MCV PHP handle parsing
-            print(forecast_data)
+            print(data)
         else:
             print("Request failed, status code:", response.status_code)
 
