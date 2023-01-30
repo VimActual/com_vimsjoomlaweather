@@ -42,34 +42,51 @@ class Weather
         $this->location_data = json_decode($response, true);
     }
 
+    private function curlWeatherGov($url)
+    {
+	    $curl = curl_init();
+	        curl_setopt_array($curl, [
+                CURLOPT_FOLLOWLOCATION => true, //Gets redirect response
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => $url,
+                CURLOPT_USERAGENT => 'youremail@example.com' // Weather.gov will deny without this
+		]);
+	    $response = curl_exec($curl);
+	    return $response;
+    }
+
     function getForecastData()
     {
         $this->lat = round($this->location_data['places'][0]['latitude'], 4);
         $this->lon = round($this->location_data['places'][0]['longitude'], 4);
         echo 'lat is: ' . $this->lat . '<br>';
         echo 'lon is: ' . $this->lon . '<br>';
-        $base_url = "https://api.weather.gov/points/{$this->lat},{$this->lon}";
-        $zip_code_url = $base_url . $this->$zip_code;
-        // need to provide email
-        $curl = curl_init();
-        curl_setopt_array($curl, [
-                CURLOPT_FOLLOWLOCATION => true, //Gets redirect response
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => $zip_code_url,
-                CURLOPT_USERAGENT => 'youremail@example.com' // Weather.gov will deny without this
-        ]);
-        $response = curl_exec($curl);
-        //$response = file_get_contents($zip_code_url); // can't use this without modifying php settings
-        $weatherData = json_decode($response, true);
-        //$this->gridpoint = $weatherData['properties']['gridId']; // get grid point
-	$this->weatherData = $weatherData;
-	return $this->weatherData;
+	$base_url = "https://api.weather.gov/points/{$this->lat},{$this->lon}";
+	$url = $base_url;
+	$response = $this->curlWeatherGov($url);
+        //$response = file_get_contents($base_url); // can't use this without modifying php settings
+        $this->$topWeatherData = json_decode($response, true);
+	//$this->gridpoint = $topWeatherData['properties']['gridId']; // get grid point
+	// Get forecast
+	$forecastResponse = $this->curlWeatherGov($this->$topWeatherData['properties']['forecast']);
+	$forecast = json_decode($forecastResponse, true);
+	$forecast14 = $forecast['properties']['periods'];
+	$keys = array_keys($forecast14[1]);
+	foreach ($keys as $key) {
+		echo '<br>key is: ' . $key;
+	}
+	$this->forecast14 = $forecast14;
+	return $forecast14;
     }
 }
+
 $weatherDataClass = new Weather();
-$forecast = $weatherDataClass->getForecastData();
-echo 'start of echos<br>';
-echo $weatherDataClass->weatherData['properties']['forecastHourly'];
+echo '<br><br>' . $weatherDataClass->forecast14[1]['detailedForecast'];
+//echo $weatherDataClass->forecast['properties']['forecast'];
+/* // getting $weatherData['properties']['<INFO>'] outside of class code
+/* $forecast = $weatherDataClass->getForecastData();
+/* echo $weatherDataClass->weatherData['properties']['forecastHourly'];
+ */
 ?>
 
 <script>
